@@ -2,9 +2,23 @@
 
 describe("Grupa", () => {
 
-    it("Test", () => {
+    it("First", () => {
+        login();
+    });
 
-        cy.visit('http://eaapp.somee.com/');
+    it("Use find", () => {
+
+        login();        
+
+        cy.get('.navbar-collapse > :nth-child(1) > :nth-child(3) > a').click();
+
+        cy.get('.table').find('tr').contains('Prashanth').parent().contains('Benefits').click();
+    });
+
+});
+
+function login() {
+    cy.visit('http://eaapp.somee.com/');
 
         cy.contains('Login').click();
 
@@ -14,6 +28,4 @@ describe("Grupa", () => {
         cy.get('#Password').type('password');
 
         cy.get('.btn').click();
-    });
-
-});
+}
