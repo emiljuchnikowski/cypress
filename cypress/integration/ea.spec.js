@@ -1,31 +1,22 @@
 /// <reference types="Cypress" />
 
 describe("Grupa", () => {
-
-    it("First", () => {
-        login();
+    beforeEach('Visti site', () => {
+        cy.visit('http://www.executeautomation.com/site');
     });
 
-    it("Use find", () => {
+    it("Implicity and explicity waiting", () => { 
+        // cy.get('[aria-label="jump to slide 2"]', { timeout: 60 * 1000 }).should('have.class', 'ls-nav-active');
+        cy.get('[aria-label="jump to slide 2"]', { timeout: 60 * 1000 }).should($x => {
+            expect($x).to.have.class('ls-nav-active');
+        });
+    });
 
-        login();        
-
-        cy.get('.navbar-collapse > :nth-child(1) > :nth-child(3) > a').click();
-
-        cy.get('.table').find('tr').contains('Prashanth').parent().contains('Benefits').click();
+    it("Implicity and explicity waiting with hook", () => { 
+        // cy.get('[aria-label="jump to slide 2"]', { timeout: 60 * 1000 }).should('have.class', 'ls-nav-active');
+        cy.get('[aria-label="jump to slide 2"]', { timeout: 60 * 1000 }).should($x => {
+            expect($x).to.have.class('ls-nav-active');
+        });
     });
 
 });
-
-function login() {
-    cy.visit('http://eaapp.somee.com/');
-
-        cy.contains('Login').click();
-
-        cy.url().should("include", "/Account/Login");
-
-        cy.get('#UserName').type('admin');
-        cy.get('#Password').type('password');
-
-        cy.get('.btn').click();
-}
